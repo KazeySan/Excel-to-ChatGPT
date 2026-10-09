@@ -1,0 +1,245 @@
+
+.stApp {
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Headings */
+h1 {
+    color: bisque;
+    font-size: 36px;
+}
+
+h2 {
+    color: bisque;
+    font-size: 28px;
+}
+
+h3 {
+    color: bisque;
+    font-size: 20px;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background-color: #1A1423;
+    color: bisque;
+    font-size: small;
+}
+
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: bisque;
+}
+
+/* Text inputs */
+.stTextInput input,
+.stTextArea textarea {
+    background-color: bisque;
+    color: #241b2f;
+}
+
+/* Main buttons */
+.stButton > button {
+    background-color: #5B3A29;
+    color: bisque;
+    border: 2px solid bisque;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.25s ease;
+}
+
+.stButton > button:hover {
+    background-color: bisque;
+    color: #5B3A29;
+    border-color: bisque;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.stButton > button:focus {
+    outline: 2px solid bisque;
+    outline-offset: 3px;
+}
+
+/* File uploader */
+[data-testid="stFileUploader"] section {
+    background-color: bisque;
+    border: 2px solid bisque;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+/* Change the drag-and-drop instructions */
+[data-testid="stFileUploaderDropzoneInstructions"],
+[data-testid="stFileUploaderDropzoneInstructions"] *,
+[data-testid="stFileUploader"] section small {
+    color: #241b2f !important;
+}
+
+/* Keep the Browse files button text cream */
+[data-testid="stFileUploader"] button,
+[data-testid="stFileUploader"] button * {
+    color: bisque !important;
+}
+
+[data-testid="stFileUploader"] button:hover {
+    background-color: rgb(255, 146, 146);
+    color: #241B2F;
+}
+
+/* Alert boxes */
+[data-testid="stAlert"],
+[data-testid="stAlert"] > div,
+[data-testid="stAlert"] [data-testid="stMarkdownContainer"] {
+    background-color: #241B2F!important;
+    color: bisque !important;
+    border-color: bisque !important;
+}
+/* Force the sheet selector and all its inner containers */
+[data-testid="stSelectbox"] [data-baseweb="select"],
+[data-testid="stSelectbox"] [data-baseweb="select"] > div,
+[data-testid="stSelectbox"] [data-baseweb="select"] > div > div,
+[data-testid="stSelectbox"] [data-baseweb="select"] > div > div > div input {
+    background-color: #0000 !important;
+    background-image: none !important;
+}
+
+/* Force cream text */
+[data-testid="stSelectbox"] [data-baseweb="select"] * {
+    background-color: #0000;
+    color: bisque !important;
+}
+
+[data-testid="stAlert"] p {
+    color: bisque !important;
+}
+/* Force the visible sheet dropdown control */
+div[data-testid="stSelectbox"] div[data-baseweb="select"] > div:first-child {
+    background:#0000 !important;
+    background-color: #0000 !important;
+    border-color: bisque !important;
+}
+
+/* Target the value container */
+div[data-testid="stSelectbox"] div[data-baseweb="select"] > div:first-child > div {
+    background-color: #241B2F !important;
+}
+
+/* Force selected value text */
+div[data-testid="stSelectbox"] div[data-baseweb="select"] div,
+div[data-testid="stSelectbox"] div[data-baseweb="select"] span {
+    color: bisque !important;
+    -webkit-text-fill-color: bisque !important;
+}
+
+
+/* Selected text */
+[data-testid="stSelectbox"] [data-baseweb="select"] *,
+[data-testid="stMultiSelect"] [data-baseweb="select"] * {
+    color: bisque !important;
+}
+[data-testid="stSelectbox"] [data-baseweb="select"] > div,
+[data-testid="stSelectbox"] [data-baseweb="select"] > div > div {
+    background: #0000 !important;
+    background-color: #0000 !important;
+}
+
+/* Keep text and arrow cream-coloured */
+[data-testid="stSelectbox"] [data-baseweb="select"] *,
+[data-testid="stSelectbox"] [data-baseweb="select"] input {
+    color: bisque !important;
+    -webkit-text-fill-color: bisque !important;
+}
+
+/* Remove dark overlays */
+[data-testid="stSelectbox"] [data-baseweb="select"] > div {
+    box-shadow: none !important;
+}
+/* Force the sheet dropdown to use the dark purple theme */
+[data-testid="stSelectbox"] [data-baseweb="select"] > div {
+    background: #0000 !important;
+    background-color: #0000 !important;
+    border-color: bisque !important;
+}
+
+/* Override nested dropdown elements */
+[data-testid="stSelectbox"] [data-baseweb="select"] > div > div {
+    background-color: #241B2F !important;
+}
+
+/* Selected sheet text */
+[data-testid="stSelectbox"] [data-baseweb="select"] *,
+[data-testid="stSelectbox"] input {
+    color: bisque !important;
+    -webkit-text-fill-color: bisque !important;
+}
+
+/* Dropdown menu and its options */
+[data-baseweb="popover"],
+[data-baseweb="popover"] > div,
+[data-baseweb="menu"],
+[role="listbox"],
+[role="option"] {
+    background-color: #0000 !important;
+    color: bisque !important;
+}
+
+/* Hovered option */
+[role="option"]:hover {
+    background-color: #5B3A29 !important;
+}
+
+/* Column multiselect */
+[data-testid="stMultiSelect"] div[data-baseweb="select"] > div {
+    background-color: #0000 !important;
+    border-color: bisque !important;
+}
+
+[data-testid="stMultiSelect"] span {
+    color: #FFFFFF !important;
+}
+
+/* Number of rows input */
+[data-testid="stNumberInput"] input {
+    background-color: #0000 !important;
+    color: bisque !important;
+    border-color: bisque !important;
+}
+
+/* Dataset table text */
+[data-testid="stDataFrame"] [role="gridcell"],
+[data-testid="stDataFrame"] [role="columnheader"],
+[data-testid="stDataFrame"] [role="rowheader"] {
+    color: bisque !important;
+}
+
+/* Table background */
+[data-testid="stDataFrame"] {
+    background-color: #0000 !important;
+}
+
+/* Round the entire prompt box */
+[data-testid="stTextArea"] [data-baseweb="textarea"] {
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    border: 2px solid bisque !important;
+    background-color: #241B2F !important;
+}
+/* Style the actual typing area */
+[data-testid="stTextArea"] textarea {
+    border-radius: 12px !important;
+    background-color: #0000 !important;
+    color: bisque !important;
+    border: none !important;
+    box-shadow: none !important;
+}
