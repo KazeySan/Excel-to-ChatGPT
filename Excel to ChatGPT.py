@@ -10,6 +10,13 @@ import base64
 # Find folder
 BASE_DIR = Path(__file__).resolve().parent
 
+MODEL_MAPPING = {
+    "ChatGPT 5.6 Sol": "gpt-5.6-sol",
+    "Claude Fabel 5": "claude-fabel-5",
+    "Gemini 3.8 Flash": "gemini-3.8-flash",
+    "DeepSeek V4.1 Flash": "deepseek-flash"
+}
+
 with open(BASE_DIR / "style.css", "r", encoding="utf-8") as file:
     css = file.read()
 
@@ -28,7 +35,7 @@ st.markdown(
 )
 
 
-st.title("Send your Excel file to ChatGPT 5.6-sol")
+st.title("Send your Excel file to LLMs")
 
 with st.sidebar:
     st.header("API")
@@ -48,7 +55,7 @@ upload_file = st.file_uploader(
 
 # Part 2: The LLM Pipeline
 
-def make_basic_call(prompt_text, api_key, base_url):
+def make_basic_call(prompt_text, api_key, base_url, model_id):
     headers = {
         "Authorization": f"Bearer {api_key}",
         "X-Title": "LLM Response",
@@ -56,7 +63,7 @@ def make_basic_call(prompt_text, api_key, base_url):
     }
 
     payload = {
-        "model": "gpt-5.6-sol",
+        "model": model_id, 
         "messages": [
             {"role": "user", "content": prompt_text}
         ],
@@ -69,10 +76,9 @@ def make_basic_call(prompt_text, api_key, base_url):
             f"{base_url.rstrip('/')}/chat/completions",
             headers=headers,
             json=payload,
-            timeout=180
+            timeout=300
         )
 
-        # Debugging information
         st.write("HTTP status:", response.status_code)
         st.write(
             "Content type:",
@@ -103,11 +109,25 @@ def make_basic_call(prompt_text, api_key, base_url):
 # Part 3: Excel selection and user prompt
 
 if upload_file is not None:
-
     try:
+        #Choosing the LLM Model
+        LLM_SELECT= st.multiselect(
+            "Select the LLM(s) you want to send the data to",
+            options=list(MODEL_MAPPING.keys())
+        )
+        chosen_model_id = [
+            MODEL_MAPPING[name]
+            for name in LLM_SELECT
+        ] 
+        if not LLM_SELECT:
+            st.warning("Please select at least one LLM")
+            st.stop()
+
+        #Uploading a file
         excel_file = pd.ExcelFile(upload_file)
         sheet_names = excel_file.sheet_names
-
+        
+        #Choosing the sheet(s)
         sheet = st.selectbox(
             "Please select the sheet",
             sheet_names
@@ -115,6 +135,7 @@ if upload_file is not None:
 
         df = pd.read_excel(upload_file, sheet_name=sheet)
 
+        #Selecting columns to send to LLM
         selected_columns = st.multiselect(
             "Select the columns you want to send to the LLM",
             options=df.columns.tolist(),
@@ -166,19 +187,34 @@ if upload_file is not None:
                     + sample.to_csv(index=False)
                 )
 
-                with st.spinner("Sending data to the LLM..."):
-                    llm_response = make_basic_call(
-                        prompt,
-                        api_key,
-                        base_url
-                    )
+                #Sending to the separate LLMs
+                for model_name, model_id in zip(
+                        LLM_SELECT,
+                        chosen_model_id
+                    ):
+                        st.subheader(model_name)
 
-                if llm_response is not None:
-                    st.subheader("LLM Response")
-                    st.markdown(llm_response)
+                        with st.spinner(
+                            f"Sending data to {model_name}..."
+                        ):
+                            llm_response = make_basic_call(
+                                prompt,
+                                api_key,
+                                base_url,
+                                model_id
+                            )
+
+                        if llm_response is not None:
+                            st.markdown(llm_response)
+                        else:
+                            st.error(
+                                f"{model_name} failed to respond."
+                            )
 
     except Exception as error:
-        st.error(f"Could not read the Excel file: {error}")
+        st.error(
+            f"Could not read the Excel file: {error}"
+        )
 
 else:
     st.info("Please upload an Excel file to begin.")
