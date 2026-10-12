@@ -41,6 +41,11 @@ with st.sidebar:
     st.header("API")
     api_key = st.text_input("Enter your API key", type="password")
     base_url = st.text_input("Enter your base URL")
+    if base_url:
+    # Remove any trailing slash the user might have typed, then add /v1
+    final_link = base_url.rstrip("/") + "/v1"
+    st.success(f"Final URL: {final_link}")
+    
     st.caption(
     "Free API keys and base URLs can be found at "
     "[api-route.com](https://api-route.com)."
@@ -55,7 +60,7 @@ upload_file = st.file_uploader(
 
 # Part 2: The LLM Pipeline
 
-def make_basic_call(prompt_text, api_key, base_url, model_id):
+def make_basic_call(prompt_text, api_key, final_link, model_id):
     headers = {
         "Authorization": f"Bearer {api_key}",
         "X-Title": "LLM Response",
@@ -73,7 +78,7 @@ def make_basic_call(prompt_text, api_key, base_url, model_id):
 
     try:
         response = requests.post(
-            f"{base_url.rstrip('/')}/chat/completions",
+            f"{final_link.rstrip('/')}/chat/completions",
             headers=headers,
             json=payload,
             timeout=300
@@ -200,7 +205,7 @@ if upload_file is not None:
                             llm_response = make_basic_call(
                                 prompt,
                                 api_key,
-                                base_url,
+                                final_link,
                                 model_id
                             )
 
