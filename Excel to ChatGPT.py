@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent
 
 MODEL_MAPPING = {
     "ChatGPT 5.6 Sol": "gpt-5.6-sol",
-    "Claude Fable 5": "claude-fable-5",
+    "Claude Haiku 5.5": "claude-haiku-5-5",
     "Gemini 3.8 Flash": "gemini-3.8-flash",
-    "DeepSeek V4.1 Flash": "deepseek-flash"
+    "DeepSeek V4.1 Flash": "deepseek-v4.1-flash"
 }
 
 with open(BASE_DIR / "style.css", "r", encoding="utf-8") as file:
@@ -68,7 +68,7 @@ def make_basic_call(prompt_text, api_key, base_url, model_id):
             {"role": "user", "content": prompt_text}
         ],
         "temperature": 0.7,
-        "max_tokens": 20000
+        "max_tokens": 6000
     }
 
     try:
