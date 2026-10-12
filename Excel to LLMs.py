@@ -82,7 +82,7 @@ def make_basic_call(prompt_text, api_key, final_link, model_id):
             f"{final_link.rstrip('/')}/chat/completions",
             headers=headers,
             json=payload,
-            timeout=300
+            timeout=700
         )
 
         st.write("HTTP status:", response.status_code)
