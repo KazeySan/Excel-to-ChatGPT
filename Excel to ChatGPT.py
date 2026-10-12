@@ -41,10 +41,11 @@ with st.sidebar:
     st.header("API")
     api_key = st.text_input("Enter your API key", type="password")
     base_url = st.text_input("Enter your base URL")
+    
     if base_url:
     # Remove any trailing slash the user might have typed, then add /v1
-    final_link = base_url.rstrip("/") + "/v1"
-    st.success(f"Final URL: {final_link}")
+        final_link = base_url.rstrip("/") + "/v1"
+        st.success(f"Final URL: {final_link}")
     
     st.caption(
     "Free API keys and base URLs can be found at "
