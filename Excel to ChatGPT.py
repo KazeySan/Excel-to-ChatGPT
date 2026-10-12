@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent
 
 MODEL_MAPPING = {
     "ChatGPT 5.6 Sol": "gpt-5.6-sol",
-    "Claude Fabel 5": "claude-fabel-5",
+    "Claude Fable 5": "claude-fable-5",
     "Gemini 3.8 Flash": "gemini-3.8-flash",
     "DeepSeek V4.1 Flash": "deepseek-flash"
 }
